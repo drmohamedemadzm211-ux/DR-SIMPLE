@@ -1,40 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DR SIMPLE</title>
 
-    <title>DR SIMPLE</title>
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f1f5f9;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+.box{
+    width:90%;
+    max-width:380px;
+    background:white;
+    padding:35px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f7fb;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+h1{
+    color:#1769aa;
+    margin-bottom:8px;
+}
 
-        .login-box {
-            width: 90%;
-            max-width: 400px;
-            background: white;
-            padding: 35px 30px;
-            border-radius: 18px;
-            box-shadow: 0 10px 35px rgba(0,0,0,0.12);
-            text-align: center;
-        }
+p{
+    color:#777;
+    margin-bottom:25px;
+}
 
-        .logo {
-            font-size: 32px;
-            font-weight: bold;
+input{
+    width:100%;
+    padding:14px;
+    margin:8px 0;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:16px;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    margin-top:15px;
+    border:0;
+    border-radius:10px;
+    background:#1769aa;
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+}
+
+footer{
+    margin-top:25px;
+    color:#999;
+    font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h1>DR SIMPLE</h1>
+
+<p>Secure Medical Courses</p>
+
+<form>
+<input type="email" placeholder="Email" required>
+
+<input type="password" placeholder="Password" required>
+
+<button type="submit">LOGIN</button>
+</form>
+
+<footer>
+© 2026 DR SIMPLE
+</footer>
+
+</div>
+
+</body>
+</html>            font-weight: bold;
             color: #1769aa;
             margin-bottom: 8px;
         }
