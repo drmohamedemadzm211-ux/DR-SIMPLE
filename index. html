@@ -1,91 +1,890 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>DR SIMPLE</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Internal Medicine 2 - End Module Exam</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #222;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+.header {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    margin: 0 0 10px;
+    font-size: 25px;
+}
+
+.header h2 {
+    margin: 5px 0;
+    font-size: 20px;
+}
+
+.info {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.info span {
+    background: #eef2f7;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.timer {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 0 0 12px 12px;
+    margin-bottom: 20px;
+}
+
+.progress-box {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.progress {
+    height: 10px;
+    background: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 5%;
+    background: #2563eb;
+    transition: 0.3s;
+}
+
+.question-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+.question-number {
+    color: #2563eb;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.question {
+    font-size: 19px;
+    font-weight: bold;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.option {
+    display: block;
+    padding: 14px;
+    margin: 10px 0;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.option:hover {
+    background: #f1f5f9;
+}
+
+.option input {
+    margin-right: 10px;
+}
+
+.option.selected {
+    border-color: #2563eb;
+    background: #eff6ff;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+button {
+    border: none;
+    padding: 12px 22px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.prev {
+    background: #64748b;
+    color: white;
+}
+
+.next {
+    background: #2563eb;
+    color: white;
+}
+
+.submit {
+    background: #16a34a;
+    color: white;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.navigator {
+    margin-top: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.navigator-title {
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.question-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+.q-btn {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background: #e2e8f0;
+}
+
+.q-btn.answered {
+    background: #2563eb;
+    color: white;
+}
+
+.q-btn.current {
+    outline: 3px solid #93c5fd;
+}
+
+.result {
+    display: none;
+    background: white;
+    padding: 35px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+.score {
+    font-size: 45px;
+    font-weight: bold;
+    margin: 20px;
+    color: #16a34a;
+}
+
+.result-message {
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+
+.review {
+    text-align: left;
+    margin-top: 25px;
+}
+
+.review-item {
+    padding: 15px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.correct {
+    background: #dcfce7;
+}
+
+.wrong {
+    background: #fee2e2;
+}
+
+@media(max-width:600px) {
+    .container {
+        padding: 10px;
+    }
+
+    .question-card {
+        padding: 18px;
+    }
+
+    .question {
+        font-size: 17px;
+    }
+
+    .header h1 {
+        font-size: 20px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <h1>DR SIMPLE</h1>
+<div class="container">
 
-    <h2>LOGIN</h2>
+<div class="header">
+    <h1>Al-Azhar University Faculty of Medicine</h1>
+    <h2>End-Module Exam — Internal Medicine 2</h2>
 
-    <p>Email</p>
-    <input type="email">
-
-    <p>Password</p>
-    <input type="password">
-
-    <br><br>
-
-    <button>LOGIN</button>
-
-</body>
-</html>            padding: 14px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            font-size: 16px;
-            outline: none;
-        }
-
-        input:focus {
-            border-color: #1769aa;
-        }
-
-        button {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
-            background: #1769aa;
-            color: white;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .footer {
-            margin-top: 25px;
-            font-size: 13px;
-            color: #999;
-        }
-    </style>
-</head>
-
-<body>
-
-    <div class="login-box">
-
-        <div class="logo">DR SIMPLE</div>
-
-        <div class="subtitle">
-            Secure Medical Courses
-        </div>
-
-        <form>
-            <input
-                type="email"
-                placeholder="Email"
-                required
-            >
-
-            <input
-                type="password"
-                placeholder="Password"
-                required
-            >
-
-            <button type="submit">
-                LOGIN
-            </button>
-        </form>
-
-        <div class="footer">
-            © 2026 DR SIMPLE
-        </div>
-
+    <div class="info">
+        <span>📅 1 September 2024</span>
+        <span>📚 Code: IMP-07-50955</span>
+        <span>📝 20 Questions</span>
+        <span>🎯 20 Marks</span>
+        <span>⏱️ 60 Minutes</span>
     </div>
+</div>
+
+<div class="timer" id="timer">
+    Time Remaining: 60:00
+</div>
+
+<div id="exam">
+
+<div class="progress-box">
+    <div>
+        Question <span id="currentNum">1</span> of 20
+    </div>
+    <br>
+    <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+</div>
+
+<div class="question-card">
+
+    <div class="question-number" id="questionNumber"></div>
+
+    <div class="question" id="questionText"></div>
+
+    <div id="options"></div>
+
+    <div class="navigation">
+        <button class="prev" id="prevBtn" onclick="previousQuestion()">
+            ← Previous
+        </button>
+
+        <button class="next" id="nextBtn" onclick="nextQuestion()">
+            Next →
+        </button>
+
+        <button class="submit" id="submitBtn" onclick="submitExam()" style="display:none;">
+            Submit Exam ✓
+        </button>
+    </div>
+
+</div>
+
+<div class="navigator">
+    <div class="navigator-title">Question Navigator</div>
+    <div class="question-buttons" id="questionButtons"></div>
+</div>
+
+</div>
+
+<div class="result" id="result">
+
+    <h2>Exam Completed 🎉</h2>
+
+    <div class="score" id="score"></div>
+
+    <div class="result-message" id="resultMessage"></div>
+
+    <button class="next" onclick="restartExam()">
+        Restart Exam
+    </button>
+
+    <div class="review" id="review"></div>
+
+</div>
+
+</div>
+
+
+<script>
+
+const questions = [
+
+{
+q: "Which of the following vascular diseases doesn't lead to abdominal pain?",
+options: [
+"Abdominal aortic aneurysm.",
+"Mesenteric vasculitis.",
+"Renal artery stenosis.",
+"Budd-Chiari syndrome.",
+"Portal vein thrombosis."
+],
+answer: 2
+},
+
+{
+q: "A young adult newly married female came to the emergency room complaining of acute severe right iliac fossa pain associated with significant pallor, sweating, and tachycardia. Her lower abdomen was markedly tender on palpation. What is the best initial test?",
+options: [
+"Dynamic MRI abdomen and pelvis.",
+"Diagnostic surgical exploration.",
+"Urine analysis and CBC.",
+"β-hCG assay.",
+"Re-examination under general anesthesia to avoid abdominal guarding during examination."
+],
+answer: 3
+},
+
+{
+q: "Which of the following stigmata is in favor of a medical rather than a surgical etiology of abdominal pain?",
+options: [
+"The pain is intermittent and without specific regionality.",
+"The presence of rebound tenderness phenomenon.",
+"The pain is accompanied by pneumoperitoneum.",
+"The pain is accompanied by positive psoas sign.",
+"The pain is associated with absolute constipation."
+],
+answer: 0
+},
+
+{
+q: "Which of the following types of arrhythmias is not seen with uncontrolled thyrotoxicosis?",
+options: [
+"Sinus tachycardia.",
+"Atrial ectopic beats.",
+"Complete heart block.",
+"Atrial fibrillation.",
+"Ventricular ectopic beats."
+],
+answer: 2
+},
+
+{
+q: "Which one of the following electrolyte disturbances is the most arrhythmogenic?",
+options: [
+"Hypernatremia.",
+"Hyperkalemia.",
+"Hyperphosphatemia.",
+"Hypercalcemia.",
+"Hypermagnesemia."
+],
+answer: 1
+},
+
+{
+q: "A 56-year-old female with metastatic breast cancer came to the emergency department complaining of acute persistent rapid regular palpitation of sudden onset associated with hypotension and markedly congested pulsating neck veins with accentuated heart sounds and clear lung bases. The ABG shows type I respiratory failure. What is the most likely cause of her palpitation?",
+options: [
+"Malignant pleural effusion.",
+"Acute myocardial infarction.",
+"Pericardial tamponade.",
+"Acute pulmonary embolism.",
+"Pulmonary metastasis."
+],
+answer: 3
+},
+
+{
+q: "Which of the following brain structures is most integral for maintaining consciousness?",
+options: [
+"The archicerebellum.",
+"The basal ganglia.",
+"The occipital cortex.",
+"The frontal cortex.",
+"The ascending reticular activating system."
+],
+answer: 4
+},
+
+{
+q: "A patient is found to have eye opening to only painful stimuli, produces only sounds without clear words, and extends the upper limbs on painful stimulation. In terms of the Glasgow Coma Scale, he is likely to attain which of the following scores?",
+options: [
+"E2 V2 M2",
+"E1 V3 M2",
+"E1 V1 M3",
+"E3 V3 M3",
+"E2 V2 M1"
+],
+answer: 0
+},
+
+{
+q: "A 67-year-old man develops sudden coma over a few minutes. He is unresponsive on arrival at the hospital. He has pinpoint pupils. There is no motor response with painful stimulation. Where is the lesion?",
+options: [
+"Diffuse extensive cerebral lesion.",
+"Bilateral cerebellar lesion.",
+"Bilateral thalamic lesion.",
+"Pontine lesion.",
+"Medullary lesion."
+],
+answer: 3
+},
+
+{
+q: "In a patient with chronic liver disease presenting with recent onset of behavioral changes and disturbed sleep rhythm, which of the following is the most likely trigger for that condition?",
+options: [
+"Sleep deprivation.",
+"Dietary protein and calorie restriction.",
+"Dyspepsia.",
+"Hypocalcemia.",
+"Constipation."
+],
+answer: 4
+},
+
+{
+q: "Upon treating a patient with flare of systemic lupus erythematosus with pulsed steroids and cyclophosphamide, she developed progressive disturbance of consciousness over several days associated with headache and convulsions. On performing lumbar puncture, there was turbidity with yellowish-white discoloration of CSF that came out under high tension. Which of the following is the most likely diagnosis?",
+options: [
+"Lupus nephritis complicated by hypertensive encephalopathy.",
+"CNS infection.",
+"Lupus cerebritis with multiple cerebral infarcts.",
+"Associated antiphospholipid syndrome complicated by cerebral venous sinus thrombosis.",
+"Associated immune thrombocytopenia complicated by cerebral hemorrhage."
+],
+answer: 1
+},
+
+{
+q: "A 25-year-old female was brought to the emergency department with profound coma. Her extremities were cold, with coarse rough skin and a puffy face. Her pulse was faint and at a rate of 42 beats/minute. Body temperature was 33.5°C. There was generalized hypotonia and hyporeflexia with preserved brainstem reflexes. What is the next step in evaluating this patient?",
+options: [
+"Order CT brain.",
+"Order lumbar puncture.",
+"Check kidney functions.",
+"Check thyroid hormone levels.",
+"Order ECG and cardiac enzymes."
+],
+answer: 3
+},
+
+{
+q: "Which of the following cardiac disorders is not associated with orthopnea?",
+options: [
+"Acute pulmonary edema.",
+"Atrial fibrillation with rapid ventricular response.",
+"Acute anterolateral myocardial infarction.",
+"Tight mitral valve stenosis.",
+"Aortic dissection."
+],
+answer: 4
+},
+
+{
+q: "Which of the following signs distinguishes uremic asthma in patients with acute respiratory distress?",
+options: [
+"Diminished vesicular breathing with prolonged expiration.",
+"An apical cardiac S3 gallop.",
+"An audible pericardial rub.",
+"Pulsus paradoxus.",
+"Central cyanosis."
+],
+answer: 1
+},
+
+{
+q: "An asthmatic patient came to the ER for acute respiratory distress. He was agitated, agonized, diaphoretic and cyanosed. On chest auscultation there was absent air entry on the right side with hyperresonance on percussion. The trachea was shifted to the left side. What is the next step?",
+options: [
+"Needle decompression.",
+"Chest tube insertion with underwater seal.",
+"100% oxygen therapy with non-invasive positive pressure ventilation.",
+"Give the patient morphine sulfate and furosemide 10 mg IV.",
+"Inhale nebulized β2 agonist."
+],
+answer: 0
+},
+
+{
+q: "Which of the following manifestations is not known to be present in patients with Behçet's disease?",
+options: [
+"Panuveitis.",
+"Cerebral venous sinus thrombosis.",
+"Arthritis.",
+"Balanitis circinata.",
+"Erythema nodosum."
+],
+answer: 3
+},
+
+{
+q: "Which of the following characteristics best fits the diagnosis of an attack of gouty arthritis?",
+options: [
+"Acute inflammatory non-erosive peripheral polyarthritis.",
+"Chronic inflammatory non-erosive peripheral polyarthritis.",
+"Acute inflammatory peripheral oligoarthritis.",
+"Acute inflammatory peripheral monoarthritis.",
+"Chronic inflammatory peripheral oligoarthritis."
+],
+answer: 3
+},
+
+{
+q: "In the setting of acute monoarthritis, what is the most beneficial investigation?",
+options: [
+"Joint imaging.",
+"Assessment of serum inflammatory markers, e.g. CRP and ESR.",
+"Serological workup.",
+"Joint aspiration.",
+"Emergency arthroscopy."
+],
+answer: 3
+},
+
+{
+q: "Which of the following explains the benefit of adrenaline in anaphylactic shock?",
+options: [
+"Competitive pharmacological antagonist to histamine.",
+"Non-competitive pharmacological antagonist to histamine.",
+"Chemical antagonist to histamine.",
+"Physiological antagonist to histamine.",
+"Inhibits antigen-antibody reaction."
+],
+answer: 3
+},
+
+{
+q: "Hypertension in a patient with diabetic kidney disease is best treated with:",
+options: [
+"Angiotensin-converting enzyme inhibitor or ARB.",
+"Beta blockers.",
+"Alpha blockers.",
+"Loop diuretic.",
+"Spironolactone."
+],
+answer: 0
+}
+
+];
+
+
+let currentQuestion = 0;
+let userAnswers = new Array(questions.length).fill(null);
+
+let timeLeft = 60 * 60;
+let timerInterval;
+
+function loadQuestion() {
+
+    const q = questions[currentQuestion];
+
+    document.getElementById("questionNumber").textContent =
+        "Question " + (currentQuestion + 1);
+
+    document.getElementById("currentNum").textContent =
+        currentQuestion + 1;
+
+    document.getElementById("questionText").textContent = q.q;
+
+    const optionsDiv = document.getElementById("options");
+    optionsDiv.innerHTML = "";
+
+    q.options.forEach((option, index) => {
+
+        const label = document.createElement("label");
+        label.className = "option";
+
+        if (userAnswers[currentQuestion] === index) {
+            label.classList.add("selected");
+        }
+
+        label.innerHTML = `
+            <input type="radio"
+                   name="answer"
+                   value="${index}"
+                   ${userAnswers[currentQuestion] === index ? "checked" : ""}>
+            <strong>${String.fromCharCode(65 + index)}.</strong>
+            ${option}
+        `;
+
+        label.onclick = function() {
+            userAnswers[currentQuestion] = index;
+            loadQuestion();
+        };
+
+        optionsDiv.appendChild(label);
+    });
+
+    document.getElementById("prevBtn").disabled =
+        currentQuestion === 0;
+
+    document.getElementById("nextBtn").style.display =
+        currentQuestion === questions.length - 1 ? "none" : "block";
+
+    document.getElementById("submitBtn").style.display =
+        currentQuestion === questions.length - 1 ? "block" : "none";
+
+    const progress =
+        ((currentQuestion + 1) / questions.length) * 100;
+
+    document.getElementById("progressBar").style.width =
+        progress + "%";
+
+    updateNavigator();
+}
+
+
+function nextQuestion() {
+
+    if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        loadQuestion();
+        window.scrollTo({top: 0, behavior: "smooth"});
+    }
+}
+
+
+function previousQuestion() {
+
+    if (currentQuestion > 0) {
+        currentQuestion--;
+        loadQuestion();
+        window.scrollTo({top: 0, behavior: "smooth"});
+    }
+}
+
+
+function updateNavigator() {
+
+    const nav = document.getElementById("questionButtons");
+    nav.innerHTML = "";
+
+    questions.forEach((q, index) => {
+
+        const button = document.createElement("button");
+
+        button.className = "q-btn";
+
+        button.textContent = index + 1;
+
+        if (userAnswers[index] !== null) {
+            button.classList.add("answered");
+        }
+
+        if (index === currentQuestion) {
+            button.classList.add("current");
+        }
+
+        button.onclick = function() {
+            currentQuestion = index;
+            loadQuestion();
+            window.scrollTo({top: 0, behavior: "smooth"});
+        };
+
+        nav.appendChild(button);
+    });
+}
+
+
+function startTimer() {
+
+    timerInterval = setInterval(() => {
+
+        timeLeft--;
+
+        let minutes = Math.floor(timeLeft / 60);
+        let seconds = timeLeft % 60;
+
+        minutes = String(minutes).padStart(2, "0");
+        seconds = String(seconds).padStart(2, "0");
+
+        document.getElementById("timer").textContent =
+            "Time Remaining: " + minutes + ":" + seconds;
+
+        if (timeLeft <= 0) {
+
+            clearInterval(timerInterval);
+
+            alert("Time is over! Your exam will be submitted automatically.");
+
+            submitExam();
+        }
+
+    }, 1000);
+}
+
+
+function submitExam() {
+
+    clearInterval(timerInterval);
+
+    let score = 0;
+
+    questions.forEach((q, index) => {
+
+        if (userAnswers[index] === q.answer) {
+            score++;
+        }
+
+    });
+
+    document.getElementById("exam").style.display = "none";
+
+    document.getElementById("result").style.display = "block";
+
+    document.getElementById("score").textContent =
+        score + " / " + questions.length;
+
+    let percentage = (score / questions.length) * 100;
+
+    let message = "";
+
+    if (percentage >= 90) {
+        message = "Excellent performance! 🔥";
+    } else if (percentage >= 75) {
+        message = "Very good! Keep going 💪";
+    } else if (percentage >= 60) {
+        message = "Good effort. Review your weak areas 📚";
+    } else {
+        message = "Keep studying and try again. You can improve! 💙";
+    }
+
+    document.getElementById("resultMessage").textContent =
+        message + " — " + percentage.toFixed(0) + "%";
+
+    showReview();
+}
+
+
+function showReview() {
+
+    const review = document.getElementById("review");
+
+    review.innerHTML = "<h3>Answer Review</h3>";
+
+    questions.forEach((q, index) => {
+
+        const div = document.createElement("div");
+
+        const user = userAnswers[index];
+
+        const correct = q.answer;
+
+        if (user === correct) {
+
+            div.className = "review-item correct";
+
+            div.innerHTML = `
+                <strong>Q${index + 1} ✓ Correct</strong><br>
+                Your answer:
+                ${String.fromCharCode(65 + correct)}.
+                ${q.options[correct]}
+            `;
+
+        } else {
+
+            div.className = "review-item wrong";
+
+            div.innerHTML = `
+                <strong>Q${index + 1} ✗ Wrong</strong><br>
+                Your answer:
+                ${user === null ? "Not answered" :
+                String.fromCharCode(65 + user) + ". " + q.options[user]}
+                <br>
+                Correct answer:
+                ${String.fromCharCode(65 + correct)}.
+                ${q.options[correct]}
+            `;
+
+        }
+
+        review.appendChild(div);
+    });
+}
+
+
+function restartExam() {
+
+    currentQuestion = 0;
+
+    userAnswers = new Array(questions.length).fill(null);
+
+    timeLeft = 60 * 60;
+
+    document.getElementById("result").style.display = "none";
+
+    document.getElementById("exam").style.display = "block";
+
+    loadQuestion();
+
+    clearInterval(timerInterval);
+
+    startTimer();
+
+    window.scrollTo({top: 0, behavior: "smooth"});
+}
+
+
+// Keyboard shortcuts
+document.addEventListener("keydown", function(e) {
+
+    if (document.getElementById("exam").style.display === "none") {
+        return;
+    }
+
+    const key = e.key.toLowerCase();
+
+    if (["a","b","c","d","e"].includes(key)) {
+
+        const index = key.charCodeAt(0) - 97;
+
+        userAnswers[currentQuestion] = index;
+
+        loadQuestion();
+    }
+
+    if (e.key === "ArrowRight") {
+        nextQuestion();
+    }
+
+    if (e.key === "ArrowLeft") {
+        previousQuestion();
+    }
+});
+
+
+// Start Exam
+loadQuestion();
+startTimer();
+
+</script>
 
 </body>
 </html>
